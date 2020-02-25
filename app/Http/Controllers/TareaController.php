@@ -14,7 +14,8 @@ class TareaController extends Controller
      */
     public function index()
     {
-        return view('tareas.tareaIndex');
+        $tareas = Tarea::all();
+        return view('tareas.tareaIndex', compact('tareas'));
     }
 
     /**
@@ -35,7 +36,16 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tarea = new Tarea();
+        $tarea->nombre_tarea = $request->nombre_tarea;
+        $tarea->fecha_inicio = $request->fecha_inicio;
+        $tarea->fecha_termino = $request->fecha_termino;
+        $tarea->descripcion = $request->descripcion;
+        $tarea->prioridad = $request->prioridad;
+
+        $tarea->save();
+        // dd($request->input('nombre_tarea'));
+        return redirect()->route('tarea.index');
     }
 
     /**
