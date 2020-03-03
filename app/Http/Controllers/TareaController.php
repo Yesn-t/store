@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class TareaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +51,7 @@ class TareaController extends Controller
         ]);
 
         $tarea = new Tarea();
+        $tarea->user_id = \Auth::id();
         $tarea->nombre_tarea = $request->nombre_tarea;
         $tarea->fecha_inicio = $request->fecha_inicio;
         $tarea->fecha_termino = $request->fecha_termino;
