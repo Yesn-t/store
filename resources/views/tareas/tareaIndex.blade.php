@@ -25,6 +25,16 @@
                     </tr>
                     @endforeach
                 </table>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="editar"></label>
+                    <div class="col-md-8">
+                        <br>
+                        <a href=" {{ route('tarea.create') }}">
+                            <button name="crear" class="btn btn-success">Crear</button>
+                        </a>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

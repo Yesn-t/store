@@ -6,56 +6,62 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3">
             <div class="card">
                 <div class="card-header">Creacion de tareas</div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <!-- Select Basic -->
                 @isset($tarea)
-                    <form action="{{ route('tarea.update', $tarea->id) }}" method="POST">
-                        @method('PATCH')
+                    {!! Form::model($tarea, ['route'=>['tarea.update', $tarea->id], 'method'=>'PATCH']) !!}
                 @else
-                    <form action="{{ route('tarea.store') }}" method="POST">
+                    {!! Form::open(['route' => 'tarea.store']) !!}
                 @endisset
-                        @csrf
 
                         {{-- Nombre --}}
                         <div class="form-group">
-                            <label class="col-lg-3 control-label" for="nombre_tarea">Nombre de tarea</label>
+                            {!! Form::label('nombre_tarea', 'Nombre de tarea') !!}
                             <div class="col-lg-3">
-                                <input name="nombre_tarea" type="text" placeholder="Tarea 1"
-                            class="form-control input-md" value="{{ $tarea->nombre_tarea ?? null }}">
+                                {!! Form::text('nombre_tarea', null, ['class'=>"form-control input-md", 'placeholder'=>'Tarea 1']) !!}
                             </div>
                         </div>
 
                         {{-- Fechas --}}
                         <div class="form-group">
-                            <label class="col-lg-1 control-label" for="fecha_inicio">Fecha de inicio: </label>
+                            {!! Form::label('fecha_inicio', null, ['class'=>"col-lg-1 control-label"]) !!}
                             <div class="col-lg-4">
-                                <input name="fecha_inicio" type="date" placeholder="placeholder"
-                                    class="form-control input-md" value="{{ $tarea->fecha_inicio ?? null }}">
+                                {!! Form::date('fecha_inicio', null, ['class'=>'form-control input-md']) !!}
                             </div>
 
-                            <label class="col-lg-1 control-label" for="fecha_termino">Fecha de Finalizacion: </label>
+                            {!! Form::label('fecha_termino', null, ['class'=>"col-lg-1 control-label"]) !!}
                             <div class="col-lg-4">
-                                <input name="fecha_termino" type="date" placeholder="placeholder"
-                                    class="form-control input-md" value="{{ $tarea->fecha_termino ?? null }}">
+                                {!! Form::date('fecha_termino', null, ['class'=>'form-control input-md']) !!}
                             </div>
                         </div>
 
                         {{-- Descripcion --}}
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="descripcion">Descripcion</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" name="descripcion">{{ $tarea->descripcion ?? null }}</textarea>
-                            </div>
+                                {!! Form::label('descripcion', ' Descripcion') !!}
+                                <div class="col-lg-3">
+                                    {!! Form::textarea('descripcion', null, ['class'=>"form-control"]) !!}
+                                </div>
+
                         </div>
 
                         {{-- Prioridad --}}
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="prioridad">Prioridad</label>
+                            {!! Form::label('prioridad', 'Prioridad', ['class'=>"col-md-3 control-label"]) !!}
                             <div class="col-md-9">
-                                <select name="prioridad" class="form-control">
-                                    <option value="1" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Alta</option>
-                                    <option value="2" {{ isset($tarea) && $tarea->prioridad == 2 ? 'selected' : ''}}>Media</option>
-                                    <option value="3" {{ isset($tarea) && $tarea->prioridad == 3 ? 'selected' : ''}}>Baja</option>
-                                </select>
+                                {!! Form::select('prioridad', [
+                                    '1'=>'Alta',
+                                    '2'=>'Media',
+                                    '3'=>'Baja'
+                                    ], null, ['class'=>'form-control']) !!}
                             </div>
                         </div>
 
@@ -65,7 +71,8 @@
                                 <button name="enviar" class="btn {{ isset($tarea) && $tarea != null ? 'btn-success' : 'btn-primary'}}">Guardar</button>
                             </div>
                         </div>
-                    </form>
+                    {{-- </form> --}}
+                    {!! Form::close() !!}
             </div>
         </div>
     </div>
