@@ -65,6 +65,14 @@
                             </div>
                         </div>
 
+                        {{-- Categoria --}}
+                        <div class="form-group">
+                            {!! Form::label('categoria', 'Categoria', ['class'=>"col-md-3 control-label"]) !!}
+                            <div class="col-md-9">
+                                {!! Form::select('categoria', $categoria, null, ['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+
                         {{-- Envio --}}
                         <div class="form-group">
                             <div class="col-md-8">

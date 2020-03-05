@@ -7,6 +7,13 @@
             <div class="card">
                 <div class="card-header">Tarea {{ $tarea->id }}</div>
 
+                <table>
+                    <th>
+                        Usuario: {{ $tarea->user->name}}  ({{ $tarea->user->email }}) <br>
+                        Categoria: {{ $tarea->categoria->nombre_categoria }}
+                    </th>
+                </table>
+
                 {{-- Nombre --}}
                 <label class="col-lg-3 control-label">Nombre de tarea</label>
                 <div class="col-lg-3">
@@ -41,6 +48,12 @@
                 <label class="col-lg-3 control-label">Estatus</label>
                 <div class="col-lg-3">
                     <input type="text" placeholder="{{ $tarea->estatus }}" class="form-control input-md" disabled>
+                </div>
+
+                {{-- Categoria --}}
+                <label class="col-lg-3 control-label">Categoria</label>
+                <div class="col-lg-3">
+                    <input type="text" placeholder="{{ $tarea->categoria->nombre_categoria }}" class="form-control input-md" disabled>
                 </div>
 
                 {{-- Editar --}}

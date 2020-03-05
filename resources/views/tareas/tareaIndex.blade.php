@@ -11,6 +11,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Tarea</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Termino</th>
                         <th>Descripcion</th>
                     </tr>
                     @foreach ($tareas as $tarea)
@@ -21,6 +23,8 @@
                                 {{ $tarea->nombre_tarea }}
                             </a>
                         </td>
+                        <td>{{ $tarea->fecha_inicio->format('d/m/y') }}</td>
+                        <td>{{ $tarea->fecha_termino->format('d/m/y') }}</td>
                         <td>{{ $tarea->descripcion }}</td>
                     </tr>
                     @endforeach

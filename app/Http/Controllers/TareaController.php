@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tarea;
+use App\Categoria;
 use Illuminate\Http\Request;
 
 class TareaController extends Controller
@@ -10,7 +11,6 @@ class TareaController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index');
-
     }
 
     /**
@@ -31,7 +31,9 @@ class TareaController extends Controller
      */
     public function create()
     {
-        return view('tareas.tareaForm');
+        $categorias = Categoria::all()->pluck('nombre_categoria', 'id');
+
+        return view('tareas.tareaForm', compact('categorias'));
     }
 
     /**
@@ -57,6 +59,7 @@ class TareaController extends Controller
         $tarea->fecha_termino = $request->fecha_termino;
         $tarea->descripcion = $request->descripcion;
         $tarea->prioridad = $request->prioridad;
+        $tarea->categoria_id = $request->categoria;
 
         $tarea->save();
         // dd($request->input('nombre_tarea'));
@@ -107,6 +110,8 @@ class TareaController extends Controller
         $tarea->fecha_termino = $request->fecha_termino;
         $tarea->descripcion = $request->descripcion;
         $tarea->prioridad = $request->prioridad;
+        $tarea->categoria_id = $request->categoria;
+
 
         $tarea->save();
 
