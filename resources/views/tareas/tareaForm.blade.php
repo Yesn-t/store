@@ -35,12 +35,12 @@
                         <div class="form-group">
                             {!! Form::label('fecha_inicio', null, ['class'=>"col-lg-1 control-label"]) !!}
                             <div class="col-lg-4">
-                                {!! Form::date('fecha_inicio', null, ['class'=>'form-control input-md']) !!}
+                                {!! Form::date('fecha_inicio', isset($tarea) ? $tarea->fecha_inicio->toDateString() : null, ['class'=>'form-control input-md']) !!}
                             </div>
 
                             {!! Form::label('fecha_termino', null, ['class'=>"col-lg-1 control-label"]) !!}
                             <div class="col-lg-4">
-                                {!! Form::date('fecha_termino', null, ['class'=>'form-control input-md']) !!}
+                                {!! Form::date('fecha_termino', isset($tarea) ? $tarea->fecha_termino->toDateString() : null, ['class'=>'form-control input-md']) !!}
                             </div>
                         </div>
 
@@ -67,16 +67,16 @@
 
                         {{-- Categoria --}}
                         <div class="form-group">
-                            {!! Form::label('categoria', 'Categoria', ['class'=>"col-md-3 control-label"]) !!}
+                            {!! Form::label('categoria_id', 'Categoria', ['class'=>"col-md-3 control-label"]) !!}
                             <div class="col-md-9">
-                                {!! Form::select('categoria', $categoria, null, ['class'=>'form-control']) !!}
+                                {!! Form::select('categoria_id', $categorias, null, ['class'=>'form-control']) !!}
                             </div>
                         </div>
 
                         {{-- Envio --}}
                         <div class="form-group">
                             <div class="col-md-8">
-                                <button name="enviar" class="btn {{ isset($tarea) && $tarea != null ? 'btn-success' : 'btn-primary'}}">Guardar</button>
+                                <button class="btn {{ isset($tarea) && $tarea != null ? 'btn-success' : 'btn-primary'}}">Guardar</button>
                             </div>
                         </div>
                     {{-- </form> --}}
