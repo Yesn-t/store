@@ -17,19 +17,15 @@
                     @foreach ($equipos as $equipo)
                     <tr>
                         <td>{{ $equipo->id }}</td>
-                        <td>
-                            <a href="{{ route('equipo.edit', $equipo->id) }}">
-                                {{ $equipo->nombre_equipo }}
-                            </a>
-                        </td>
+                        <td>{{ $equipo->nombre_equipo }}</td>
                         <td>
                             @foreach ($equipo->users as $user)
                                {{ $user->name }}
                             @endforeach
                         </td>
                         <td>
-                            <a href=" {{ route('equipo.create') }}">
-                                <button name="crear" class="btn btn-success">Crear</button>
+                            <a href="{{ route('equipo.edit', $equipo->id) }}">
+                                <button name="crear" class="btn btn-success">Editar</button>
                             </a>
                         </td>
                     </tr>

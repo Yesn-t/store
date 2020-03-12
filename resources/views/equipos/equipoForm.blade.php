@@ -35,7 +35,7 @@
                         <div class="form-group">
                             {!! Form::label('user_id', 'Intergrates', ['class'=>"col-md-3 control-label"]) !!}
                             <div class="col-md-9">
-                                {!! Form::select('user_id[]', $users, null, ['class'=>'form-control']) !!}
+                                {!! Form::select('user_id[]', $users, isset($equipo) ? $equipo->users()->pluck('id') : null, ['class'=>'form-control', 'multiple']) !!}
                             </div>
                         </div>
 
