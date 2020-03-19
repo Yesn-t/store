@@ -1,46 +1,115 @@
-@extends('layouts.app')
+@extends('layouts.tema')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Lista de tareas</div>
 
-                <table class="table">
-                    <tr>
-                        <th>ID</th>
-                        <th>Tarea</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Termino</th>
-                        <th>Descripcion</th>
-                    </tr>
-                    @foreach ($tareas as $tarea)
-                    <tr>
-                        <td>{{ $tarea->id }}</td>
-                        <td>
-                            <a href="{{ route('tarea.show', $tarea->id) }}">
-                                {{ $tarea->nombre_tarea }}
-                            </a>
-                        </td>
-                        <td>{{ $tarea->fecha_inicio->format('d/m/y') }}</td>
-                        <td>{{ $tarea->fecha_termino->format('d/m/y') }}</td>
-                        <td>{{ $tarea->descripcion }}</td>
-                    </tr>
-                    @endforeach
-                </table>
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="editar"></label>
-                    <div class="col-md-8">
-                        <br>
-                        <a href=" {{ route('tarea.create') }}">
-                            <button name="crear" class="btn btn-success">Crear</button>
-                        </a>
-
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length"
+                                    aria-controls="dataTable"
+                                    class="custom-select custom-select-sm form-control form-control-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                    class="form-control form-control-sm" placeholder=""
+                                    aria-controls="dataTable"></label></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 58px;">
+                                        ID</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending" style="width: 63px;">
+                                        Tarea</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending" style="width: 50px;">
+                                        Fecha Inicio</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Start date: activate to sort column ascending" style="width: 68px;">
+                                        Fecha Termino</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending" style="width: 67px;">
+                                        Descripcion</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">ID</th>
+                                    <th rowspan="1" colspan="1">Tarea</th>
+                                    <th rowspan="1" colspan="1">Fecha Inicio</th>
+                                    <th rowspan="1" colspan="1">Fecha Termino</th>
+                                    <th rowspan="1" colspan="1">Start Descripcion</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach ($tareas as $tarea)
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1">{{ $tarea->id }}</td>
+                                    <td>
+                                        <a href="{{ route('tarea.show', $tarea->id) }}">
+                                            {{ $tarea->nombre_tarea }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $tarea->fecha_inicio->format('d/m/y') }}</td>
+                                    <td>{{ $tarea->fecha_termino->format('d/m/y') }}</td>
+                                    <td>{{ $tarea->descripcion }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to
+                            10 of 57 entries</div>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button page-item previous disabled" id="dataTable_previous"><a
+                                        href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+                                        class="page-link">Previous</a></li>
+                                <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
+                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
+                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
+                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
+                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
+                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
+                                        data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                                <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
+                                        aria-controls="dataTable" data-dt-idx="7" tabindex="0"
+                                        class="page-link">Next</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
